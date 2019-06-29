@@ -7,12 +7,17 @@
 class TokenBase
 {
 public:
+    enum TokenPrecedence
+    {
+        Brackets,
 
+    };
 
     std::string content;
 
     virtual bool isOperator() = 0;
 protected:
+
     TokenBase();
 
 };

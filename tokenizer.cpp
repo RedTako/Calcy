@@ -22,20 +22,20 @@ std::vector<Tokenizer::TokenPtr>& Tokenizer::tokenize(std::string str)
         Multiply,
     };
 
-    const std::unordered_map<QString, StringResult> strMap = {
-        {str("+"), Plus},
-        {str("-"), Minus},
-        {str("*"), Multiply},
-        {QString::fromUtf16(u"÷"), Divide},
-        {str("("), LeftBracket},
-        {str(")"), RightBracket}
+    const std::unordered_map<std::basic_string<char16_t>, StringResult> strMap = {
+        {u"+", Plus},
+        {u"-", Minus},
+        {u"*", Multiply},
+        {u"÷", Divide},
+        {u"(", LeftBracket},
+        {u")", RightBracket}
 
     };
 
 
 
 
-    switch (strMap.at(QString::fromStdString(str)))
+    switch (strMap.at(str))
     {
         case Plus:
             break;
