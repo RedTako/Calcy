@@ -42,31 +42,30 @@ void MainWindow::init()
         ui->btnRightBracket,
         ui->btnDecimal
     };
-
-
-
-    auto connectButton = [&](EventButton*& btn) {
+    auto connectButton = [&](EventButton*& btn)
+    {
         connect(btn, &EventButton::clickedSender, this, &MainWindow::onButtonClick);
     };
-
-    auto simpleConnect = [&](EventButton*& btn, const std::function<void(void)>& func) {
+    auto simpleConnect = [&](EventButton*& btn, const std::function<void(void)>& func)
+    {
         connect(btn, &EventButton::clicked, this, func);
     };
-
-    auto backButton = [&]() {
+    auto backButton = [&]()
+    {
         QString str = ui->input->text();
         QString buf = "";
         for(int i = 0; i < str.size() - 1; i++)
             buf += str[i];
         ui->input->setText(buf);
     };
-
-    auto clearButton = [&]() {
+    auto clearButton = [&]()
+    {
         ui->input->clear();
     };
-
-    auto equalsButton = [&]() {
-        ui->input->validate();
+    auto equalsButton = [&]()
+    {
+        double value = ui->input->validate();
+        ui->input->setText(QString::number(value));
     };
 
     for(size_t i = 0; i < arr.size(); i++)
@@ -77,7 +76,6 @@ void MainWindow::init()
     simpleConnect(ui->btnBack, backButton);
     simpleConnect(ui->btnClear, clearButton);
     simpleConnect(ui->btnEquals, equalsButton);
-
 
 }
 

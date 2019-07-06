@@ -1,6 +1,7 @@
 #include "inputbox.h"
 #include <QPaintEvent>
-
+#include <stack>
+#include <vector>
 #include <QPainter>
 
 InputBox::InputBox(QWidget *parent) : QLineEdit(parent)
@@ -10,8 +11,102 @@ InputBox::InputBox(QWidget *parent) : QLineEdit(parent)
 
 double InputBox::validate()
 {
+    auto string = this->text();
+    const std::vector<Tokenizer::TokenPtr>& list = tokenizer.tokenize(text());
 
-    return 0;
+    auto test = (*(list[0])).getContent().toStdString().c_str();
+
+    std::vector<TokenBase*> output;
+    std::stack<TokenBase*> operatorStack;
+
+    for(size_t i = 0; i < list.size(); i++)
+    {
+        TokenBase* t = list[i].get();
+        if(t->isOperator())
+        {
+            if(operatorStack.size() == 0 || operatorStack.top()->getContent() == '(')
+            {
+                operatorStack.push(t);
+            }
+            else if(t->getContent() == "(") { operatorStack.push(t); }
+            else if(t->getContent() == ")")
+            {
+                do
+                {
+                    output.push_back(operatorStack.top());
+                    operatorStack.pop();
+                }
+                while(operatorStack.top()->getContent() != "(");
+                if(operatorStack.top()->getContent() == "(")
+                    operatorStack.pop();
+            }
+            else if(operatorStack.top()->getPrecedence() > t->getPrecedence())
+            {
+                operatorStack.push(t);
+            }
+            else if(operatorStack.top()->getPrecedence() <= t->getPrecedence())
+            {
+                output.push_back(operatorStack.top());
+                operatorStack.pop();
+
+                operatorStack.push(t);
+            }
+            else
+            {
+                operatorStack.push(t);
+            }
+        }
+        else
+        {
+            output.push_back(t);
+        }
+
+        if(i == list.size() - 1 && operatorStack.size() > 0)
+        {
+            size_t stackSize = operatorStack.size();
+            for(size_t j = 0; j < stackSize; j++)
+            {
+                output.push_back(operatorStack.top());
+                operatorStack.pop();
+            }
+
+        }
+    }
+
+    std::stack<double> operandStack;
+    size_t stackSize = output.size();
+    double result = 0;
+    for(size_t i = 0; i < stackSize; i++)
+    {
+        TokenBase* t = output[i];
+        if(t->isOperator())
+        {
+            OperatorToken* op = static_cast<OperatorToken*>(t);
+            double& d1 = operandStack.top();
+            operandStack.pop();
+
+            double r = 0;
+            if(operandStack.size() > 0)
+            {
+                double& d2 = operandStack.top();
+                operandStack.pop();
+                r = op->evaluate(d2, d1);
+            }
+            else
+            {
+                r = op->evaluate(0, d1);
+            }
+
+
+            operandStack.push(r);
+        }
+        else
+        {
+            operandStack.push(static_cast<ValueToken*>(t)->getValue());
+        }
+    }
+
+    return operandStack.top();
 }
 
 void InputBox::paintEvent(QPaintEvent *event)

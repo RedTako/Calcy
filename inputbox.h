@@ -2,6 +2,7 @@
 #define INPUTBOX_H
 
 #include <QLineEdit>
+#include <tokenizer.h>
 
 class InputBox : public QLineEdit
 {
@@ -17,7 +18,7 @@ public:
 protected:
     void paintEvent(QPaintEvent* event) override;
     void timerEvent(QTimerEvent* event) override;
-
+    Tokenizer tokenizer;
 
 private slots:
     void onTextEdit(const QString& str);

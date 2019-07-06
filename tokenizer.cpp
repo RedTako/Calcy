@@ -1,7 +1,12 @@
 #include "tokenizer.h"
 
 #include <unordered_map>
+#include <unordered_set>
 #include <QString>
+#include <QStringList>
+#include <QRegExp>
+#include <algorithm>
+#include <stack>
 
 
 Tokenizer::Tokenizer()
@@ -9,57 +14,93 @@ Tokenizer::Tokenizer()
 
 }
 
-std::vector<Tokenizer::TokenPtr>& Tokenizer::tokenize(std::string str)
+const std::vector<Tokenizer::TokenPtr>& Tokenizer::getTokenList() const
+{
+    return tokenList;
+}
+
+const std::vector<Tokenizer::TokenPtr> &Tokenizer::tokenize(QString str)
 {
 #define str(x) QString(x)
-#define str16(x) QString::fromUtf16(x)
 
-    enum StringResult
+
+    if(tokenList.size() > 0)
+        tokenList.clear();
+
+
+    std::stack<QChar> numStack;
+
+    auto tokenizeNumberString = [&]()
     {
-        Plus,           LeftBracket,
-        Minus,          RightBracket,
-        Divide,
-        Multiply,
+        if(numStack.size() > 0) //if elem in stack
+        {
+            QString container = "";
+            int stackSize = numStack.size();
+            for(int j = 0; j < stackSize; j++)
+            {
+                container.push_front(numStack.top());
+                numStack.pop();
+            }
+            tokenList.push_back(std::make_unique<ValueToken>(container));
+        }
     };
 
-    const std::unordered_map<std::basic_string<char16_t>, StringResult> strMap = {
-        {u"+", Plus},
-        {u"-", Minus},
-        {u"*", Multiply},
-        {u"÷", Divide},
-        {u"(", LeftBracket},
-        {u")", RightBracket}
-
-    };
-
-
-
-
-    switch (strMap.at(str))
+    for(int i = 0; i < str.length(); i++)
     {
-        case Plus:
-            break;
-
-        case Minus:
-            break;
-
-        case Divide:
-            break;
-
-        case Multiply:
-            break;
-
-        case LeftBracket:
-            break;
-
-        case RightBracket:
-            break;
+        QChar c = str[i];
+        auto result = TokenBase::strMap.find(c);
+        if(result == TokenBase::strMap.end()) //no match
+        {
+            numStack.push(c);
+        }
+        else
+        {
+            tokenizeNumberString();
+            tokenList.push_back(std::make_unique<OperatorToken>(QString(str[i])));
+        }
+        if(i == str.length() - 1)
+        {
+            tokenizeNumberString();
+        }
     }
 
 
+    return tokenList;
+
+}
+
+std::vector<Tokenizer::TokenRef> &Tokenizer::sortByPrecedence()
+{
+//    typedef std::vector<TokenRef> tokenVec;
+
+//    auto swap = [](TokenRef& a, TokenRef& b)
+//    {
+//        TokenRef buffer = a;
+//        a = b;
+//        b = buffer;
+//    };
 
 
 
+//    int i = 1;
+//    tokenVec& vec = tokenList;
+//    while (i < tokenList.size())
+//    {
+//        int j = i;
+//        TokenRef t1 = vec[j-1];
+//        TokenRef t2 = vec[j];
+//        while(j > 0 && (t1.get().getPrecedence() > t2.get().getPrecedence()))
+//        {
+//            swap(t1, t2);
+//        }
+
+//    }
+
+//    return vec;
     throw std::exception();
+}
 
+const char *NoMatchException::what() const noexcept
+{
+    return errorMsg;
 }
