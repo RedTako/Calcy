@@ -53,6 +53,7 @@ public:
     TokenPrecedence getPrecedence() const;
 
     virtual bool isOperator() = 0;
+    virtual bool isFunction() = 0;
 
     virtual const QString& getContent() const;
     virtual ~TokenBase();
@@ -69,6 +70,7 @@ public:
     ValueToken(const QString& content, TokenPrecedence precedence = TokenBase::Number);
 
     virtual bool isOperator() override;
+    virtual bool isFunction() override;
     double getValue() const;
 
     virtual ~ValueToken() override;
@@ -81,18 +83,21 @@ public:
     OperatorToken(const QString& content);
 
     virtual bool isOperator() override;
+    virtual bool isFunction() override;
     virtual double evaluate(const double& first, const double& second);
 
     virtual ~OperatorToken() override;
 };
 
-class FunctionToken : public OperatorToken //sin and cos etc...
+class FunctionToken : public TokenBase //sin and cos etc...
 {
 public:
-    FunctionToken(const QString& content, TokenPrecedence precedence = TokenBase::Brackets);
+    FunctionToken(const QString& content);
 
     virtual bool isOperator() override;
-    virtual double evaluate(const double& first, const double& second) override;
+    virtual bool isFunction() override;
+
+    virtual double evaluate(const double& value);
 
     virtual ~FunctionToken() override;
 };

@@ -2,6 +2,7 @@
 #include <streambuf>
 #include <unordered_map>
 #include <functional>
+#include <math.h>
 
 const std::unordered_map<QString, TokenBase::TokenPrecedence> TokenBase::strMap = {
 { QString::fromUtf16(u"+"), PlusMinus},
@@ -9,7 +10,8 @@ const std::unordered_map<QString, TokenBase::TokenPrecedence> TokenBase::strMap 
 { QString::fromUtf16(u"x"), MultiplyDivide},
 { QString::fromUtf16(u"÷"), MultiplyDivide},
 { QString::fromUtf16(u"("), Brackets},
-{ QString::fromUtf16(u")"), Brackets}
+{ QString::fromUtf16(u")"), Brackets},
+{ QString::fromUtf16(u"^"), Operations}
 };
 
 
@@ -44,6 +46,11 @@ bool ValueToken::isOperator()
     return false;
 }
 
+bool ValueToken::isFunction()
+{
+    return false;
+}
+
 double ValueToken::getValue() const
 {
     return content.toDouble();
@@ -58,15 +65,6 @@ ValueToken::~ValueToken()
 OperatorToken::OperatorToken(const QString& content)
 {
     this->content = content;
-
-//    const std::unordered_map<QString, TokenPrecedence> strMap = {
-//        { QString::fromUtf16(u"+"), PlusMinus},
-//        { QString::fromUtf16(u"-"), PlusMinus},
-//        { QString::fromUtf16(u"x"), MultiplyDivide},
-//        { QString::fromUtf16(u"÷"), MultiplyDivide},
-//        { QString::fromUtf16(u"("), Brackets},
-//        { QString::fromUtf16(u")"), Brackets}
-//    };
 
     auto result = strMap.find(content);
     if(result == strMap.end())
@@ -86,7 +84,10 @@ bool OperatorToken::isOperator()
     return true;
 }
 
-
+bool OperatorToken::isFunction()
+{
+    return false;
+}
 
 double OperatorToken::evaluate(const double &first, const double &second)
 {
@@ -97,13 +98,15 @@ double OperatorToken::evaluate(const double &first, const double &second)
     auto minus =    [](const double& a, const double& b) { return a - b; };
     auto divide =   [](const double& a, const double& b) { return a / b; };
     auto multiply = [](const double& a, const double& b) { return a * b; };
+    auto power =    [](const double& a, const double& b) { return pow(a, b); };
 
-    const std::unordered_map<QString, std::function<double(double, double)>> map =
+    const static std::unordered_map<QString, std::function<double(double, double)>> map =
     {
         { str16(u"+"), add },
         { str16(u"-"), minus },
         { str16(u"÷"), divide },
-        { str16(u"x"), multiply }
+        { str16(u"x"), multiply },
+        { str16(u"^"), power}
     };
 
     auto result = map.find(this->content);
@@ -124,19 +127,28 @@ OperatorToken::~OperatorToken()
 
 
 
-FunctionToken::FunctionToken(const QString& content, TokenPrecedence precedence) :
-    OperatorToken(content, precedence)
+FunctionToken::FunctionToken(const QString& content)
 {
-
+    this->content = content;
+    this->precedence = TokenPrecedence::Operations;
 }
 
 bool FunctionToken::isOperator()
 {
+    return false;
+}
+
+bool FunctionToken::isFunction()
+{
     return true;
 }
 
-double FunctionToken::evaluate(const double &first, const double &second)
+double FunctionToken::evaluate(const double& value)
 {
+    static const std::unordered_map<QString, std::function<double(double)>> map =
+    {
+
+    };
     return 0;
 }
 

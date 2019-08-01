@@ -76,7 +76,7 @@
        </widget>
       </item>
       <item row="2" column="0">
-       <widget class="EventButton" name="pushButton_51">
+       <widget class="EventButton" name="btnInt">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -95,7 +95,7 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="EventButton" name="pushButton_52">
+       <widget class="EventButton" name="btnSineH">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -114,7 +114,7 @@
        </widget>
       </item>
       <item row="2" column="2">
-       <widget class="EventButton" name="pushButton_53">
+       <widget class="EventButton" name="btnSine">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -133,7 +133,7 @@
        </widget>
       </item>
       <item row="2" column="4">
-       <widget class="EventButton" name="pushButton_55">
+       <widget class="EventButton" name="btnFactoral">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -152,7 +152,7 @@
        </widget>
       </item>
       <item row="2" column="3">
-       <widget class="EventButton" name="pushButton_54">
+       <widget class="EventButton" name="btnSquare">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -190,7 +190,7 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="EventButton" name="pushButton_44">
+       <widget class="EventButton" name="btnInvert">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -247,7 +247,7 @@
        </widget>
       </item>
       <item row="1" column="0">
-       <widget class="EventButton" name="pushButton_42">
+       <widget class="EventButton" name="btnBlank1">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -709,7 +709,7 @@
        </widget>
       </item>
       <item row="3" column="0">
-       <widget class="EventButton" name="pushButton_56">
+       <widget class="EventButton" name="btnDMS">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -728,7 +728,7 @@
        </widget>
       </item>
       <item row="3" column="1">
-       <widget class="EventButton" name="pushButton_57">
+       <widget class="EventButton" name="btnCosineH">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -747,7 +747,7 @@
        </widget>
       </item>
       <item row="3" column="2">
-       <widget class="EventButton" name="pushButton_58">
+       <widget class="EventButton" name="btnCosine">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -766,7 +766,7 @@
        </widget>
       </item>
       <item row="3" column="3">
-       <widget class="EventButton" name="pushButton_59">
+       <widget class="EventButton" name="btnPower">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -785,7 +785,7 @@
        </widget>
       </item>
       <item row="3" column="4">
-       <widget class="EventButton" name="pushButton_60">
+       <widget class="EventButton" name="btnNRoot">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -861,7 +861,7 @@
        </widget>
       </item>
       <item row="4" column="0">
-       <widget class="EventButton" name="pushButton_61">
+       <widget class="EventButton" name="btnPi">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -880,7 +880,7 @@
        </widget>
       </item>
       <item row="4" column="1">
-       <widget class="EventButton" name="pushButton_62">
+       <widget class="EventButton" name="btnTangentH">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -899,7 +899,7 @@
        </widget>
       </item>
       <item row="4" column="2">
-       <widget class="EventButton" name="pushButton_63">
+       <widget class="EventButton" name="btnTangent">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -918,7 +918,7 @@
        </widget>
       </item>
       <item row="4" column="3">
-       <widget class="EventButton" name="pushButton_64">
+       <widget class="EventButton" name="btnCubed">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -937,7 +937,7 @@
        </widget>
       </item>
       <item row="4" column="4">
-       <widget class="EventButton" name="pushButton_65">
+       <widget class="EventButton" name="btnCubeRoot">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -956,7 +956,7 @@
        </widget>
       </item>
       <item row="5" column="0">
-       <widget class="EventButton" name="pushButton_66">
+       <widget class="EventButton" name="btnBlank2">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -975,7 +975,7 @@
        </widget>
       </item>
       <item row="5" column="1">
-       <widget class="EventButton" name="pushButton_67">
+       <widget class="EventButton" name="btnExponent">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -994,7 +994,7 @@
        </widget>
       </item>
       <item row="5" column="2">
-       <widget class="EventButton" name="pushButton_68">
+       <widget class="EventButton" name="btnMod">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -1013,7 +1013,7 @@
        </widget>
       </item>
       <item row="5" column="3">
-       <widget class="EventButton" name="pushButton_69">
+       <widget class="EventButton" name="btnLog">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -1032,7 +1032,7 @@
        </widget>
       </item>
       <item row="5" column="4">
-       <widget class="EventButton" name="pushButton_70">
+       <widget class="EventButton" name="btnInverseLog">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -1051,7 +1051,7 @@
        </widget>
       </item>
       <item row="0" column="0" colspan="5">
-       <widget class="QFrame" name="frame">
+       <widget class="QFrame" name="modeFrame">
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
         </property>
@@ -1108,6 +1108,52 @@
     </item>
    </layout>
   </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>674</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+    <addaction name="actionBasic"/>
+    <addaction name="actionScientific"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuView"/>
+  </widget>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionBasic">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Basic</string>
+   </property>
+  </action>
+  <action name="actionScientific">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Scientific</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>

@@ -40,7 +40,8 @@ void MainWindow::init()
         ui->btnDivide,
         ui->btnLeftBracket,
         ui->btnRightBracket,
-        ui->btnDecimal
+        ui->btnDecimal,
+        ui->btnRoot
     };
     auto connectButton = [&](EventButton*& btn)
     {
@@ -67,6 +68,10 @@ void MainWindow::init()
         double value = ui->input->validate();
         ui->input->setText(QString::number(value));
     };
+    auto squareButton = [&]() { ui->input->insert("^2"); };
+    auto cubedButton = [&]() { ui->input->insert("^3"); };
+    auto powerButton = [&]() { ui->input->insert("^"); };
+
 
     for(size_t i = 0; i < arr.size(); i++)
     {
@@ -76,13 +81,17 @@ void MainWindow::init()
     simpleConnect(ui->btnBack, backButton);
     simpleConnect(ui->btnClear, clearButton);
     simpleConnect(ui->btnEquals, equalsButton);
+    simpleConnect(ui->btnSquare, squareButton);
+    simpleConnect(ui->btnCubed, cubedButton);
+    simpleConnect(ui->btnPower, powerButton);
 
 }
 
 void MainWindow::onButtonClick(EventButton *btn)
 {
-    auto txt = ui->input->text();
-    ui->input->setText(txt + btn->text());
+//    auto txt = ui->input->text();
+//    ui->input->setText(txt + btn->text());
+      ui->input->insert( btn->text() );
 }
 
 void MainWindow::onBackClick()

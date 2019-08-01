@@ -41,4 +41,9 @@ HEADERS += \
 FORMS += \
         mainwindow.ui
 
-QMAKE_CXXFLAGS = -std=c++17
+QMAKE_CXXFLAGS = -std=c++17 #-o3
+
+CONFIG(release, debug|release)
+{
+    QMAKE_CXXFLAGS += -O3
+}

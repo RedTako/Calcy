@@ -106,6 +106,8 @@ double InputBox::validate()
         }
     }
 
+
+
     return operandStack.top();
 }
 

@@ -58,6 +58,7 @@ const std::vector<Tokenizer::TokenPtr> &Tokenizer::tokenize(QString str)
             tokenizeNumberString();
             tokenList.push_back(std::make_unique<OperatorToken>(QString(str[i])));
         }
+
         if(i == str.length() - 1)
         {
             tokenizeNumberString();
@@ -71,32 +72,6 @@ const std::vector<Tokenizer::TokenPtr> &Tokenizer::tokenize(QString str)
 
 std::vector<Tokenizer::TokenRef> &Tokenizer::sortByPrecedence()
 {
-//    typedef std::vector<TokenRef> tokenVec;
-
-//    auto swap = [](TokenRef& a, TokenRef& b)
-//    {
-//        TokenRef buffer = a;
-//        a = b;
-//        b = buffer;
-//    };
-
-
-
-//    int i = 1;
-//    tokenVec& vec = tokenList;
-//    while (i < tokenList.size())
-//    {
-//        int j = i;
-//        TokenRef t1 = vec[j-1];
-//        TokenRef t2 = vec[j];
-//        while(j > 0 && (t1.get().getPrecedence() > t2.get().getPrecedence()))
-//        {
-//            swap(t1, t2);
-//        }
-
-//    }
-
-//    return vec;
     throw std::exception();
 }
 
