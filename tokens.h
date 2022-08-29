@@ -5,6 +5,9 @@
 #include <QString>
 #include <unordered_map>
 
+#include <QHashFunctions>
+
+/*
 namespace std
 {
     template<> struct hash<QString>
@@ -36,6 +39,7 @@ namespace std
         }
     };
 }
+*/
 
 class TokenBase
 {
